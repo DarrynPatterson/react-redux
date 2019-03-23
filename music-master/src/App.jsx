@@ -1,14 +1,41 @@
 import React, { Component } from "react";
+import "./App.css";
+import { FormGroup, FormControl, InputGroup, Button } from "react-bootstrap";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      query: ""
+    };
+  }
+
+  search() {
+    console.log("this.state", this.state);
+  }
+
   render() {
     return (
-      <div>
+      <div className="App">
         <div className="App-title">Music Master</div>
-        <div>
-          <input placeholder="search an artist..." />
-          <button>button</button>
-        </div>
+        <FormGroup>
+          <InputGroup>
+            <FormControl
+              type="text"
+              placeholder="Search for an Artist"
+              value={this.state.query}
+              onChange={event => {
+                this.setState({ query: event.target.value });
+              }}
+              onKeyPress={event => {
+                if (event.key === "Enter") {
+                  this.search();
+                }
+              }}
+            />
+          </InputGroup>
+          <Button onClick={() => this.search()}>Search</Button>
+        </FormGroup>
         <div className="Profile">
           <div>Artist Picture</div>
           <div>Artist Name</div>
